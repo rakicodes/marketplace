@@ -1,4 +1,5 @@
 import{ Model, Types } from "mongoose";
+import { Request } from "express";
 
 export type TUserId = Types.ObjectId
 
@@ -10,3 +11,7 @@ export type TUser = {
 }
 
 export type TUserModel = Model<TUser>
+
+export interface IRequestExtendsUser extends Request {
+    user?: TUser
+}

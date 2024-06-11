@@ -11,7 +11,31 @@ import { ParamsDictionary } from 'express-serve-static-core';
  ** @route   POST /api/auth/login
  ** @access  Public
  */
-export const login = asyncHandler(async (req, res) => {});
+export const login = asyncHandler(async (req: Request<ParamsDictionary, any, TUser>, res) => {
+    try {
+        const { email, password } = req.body;
+    
+        if (!email || !password) {
+          res.status(400).json("Please add all fields");
+        }
+    
+        // check for user email
+        const user: TUser | null = await User.findOne({ email: email });
+    
+        if (user && user._id && (await bcrypt.compare(password, user.password))) {
+          res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user._id),
+          });
+        } else {
+          res.status(400).json("Invalid credentials");
+        }
+      } catch (error) {
+        res.status(200).json("Sorry something went wrong. Couldn't log in");
+      }
+});
 
 /**
  ** @desc    register new user

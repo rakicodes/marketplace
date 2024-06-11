@@ -28,7 +28,7 @@ export type TListing = {
     featuredListing: boolean,
     status: string,
     year: number,
-    isNew: boolean,
+    isUsed: boolean,
     isCertified: boolean
 }
 

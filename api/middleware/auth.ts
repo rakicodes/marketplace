@@ -2,7 +2,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import { Response, NextFunction } from "express";
 import { UserModel as User } from "../models/User";
-import { IRequestExtendsUser } from "../types/user";
+import { IRequestExtendsUser, TUser } from "../types/user";
 
 const protect = asyncHandler(async (
 	req: IRequestExtendsUser,
@@ -29,8 +29,7 @@ const protect = asyncHandler(async (
 				process.env.JWT_SECRET || "JWT_SECRET"
 			) as JwtPayload;
 			// get user from the token
-			const user = await User.findById(id).select("-password");
-            console.log(user)
+			const user: TUser | null = await User.findById(id).select("-password");
 			if (user) {
 				req.user = user;
 			} else {

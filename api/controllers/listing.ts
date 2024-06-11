@@ -1,11 +1,12 @@
 import asyncHandler from "express-async-handler";
 import { ListingModel as Listing } from "../models/Listing";
 import { AnalyticModel as Analytic } from "../models/Analytic";
-import { Request, Express } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
+import { Request } from "express";
 import { Status, TListing } from "../types/listing";
 import { generateListingId } from "../utils/listing";
 import cloudinary from "../middleware/cloudinary";
+import { TAnalytic } from "../types/analytic";
+import { IRequestExtendsUser } from "../types/user";
 
 /**
  ** @desc    get listing by its id
@@ -27,7 +28,7 @@ export const getAll = asyncHandler(async (req, res) => {});
  ** @access  Private
  */
 export const add = asyncHandler(
-	async (req: Request<ParamsDictionary, any, TListing>, res) => {
+	async (req: IRequestExtendsUser, res) => {
 		try {
 			const {
 				name,
@@ -39,16 +40,14 @@ export const add = asyncHandler(
 				packageType,
 				make,
 				year,
-				isNew,
+				isUsed,
 				isCertified,
 			} = req.body;
 
-			/*
             if (!req.user) {
             res.status(401).json("Unauthorized. You are not logged in.");
             return;
             }
-            */
 
 			if (!req.files) {
 				res
@@ -109,7 +108,7 @@ export const add = asyncHandler(
                 }
 			}
 
-			const analytic = await Analytic.findOne({ name: "totalListing" });
+			const analytic: TAnalytic | null = await Analytic.findOne({ name: "totalListing" });
 
 			const listing: TListing = await Listing.create({
 				name,
@@ -121,7 +120,7 @@ export const add = asyncHandler(
 				packageType,
 				make,
 				year,
-				isNew,
+				isUsed,
 				isCertified,
                 cloudinaryIds,
                 images: cloudinaryImages,

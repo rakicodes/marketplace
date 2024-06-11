@@ -59,7 +59,7 @@ const ListingSchema = new Schema<TListing, TListingModel>({
             type: Number,
             required: true
         },
-        isNew: {
+        isUsed: {
             type: Boolean,
             required: true
         },

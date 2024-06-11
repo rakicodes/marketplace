@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/auth";
+import listingRoutes from "./routes/listing";
 
 
 dotenv.config();
@@ -20,6 +21,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/listing", listingRoutes);
 
 app.listen(port, () => {
   console.log(`Marketplace API listening on port ${port}`);

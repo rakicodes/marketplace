@@ -6,6 +6,6 @@ router.get("/:id", getOne)
 router.get("/", getAll)
 router.post("/add", add);
 router.put("/edit/:id", edit);
-router.put("delete/:id", remove)
+router.put("/delete/:id", remove)
 
 export default router;

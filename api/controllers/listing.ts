@@ -3,7 +3,7 @@ import { ListingModel as Listing } from "../models/Listing";
 import { AnalyticModel as Analytic } from "../models/Analytic";
 import { Request } from "express";
 import { Status, TListing } from "../types/listing";
-import { generateListingId } from "../utils/listing";
+import { generateListingId, listingFiltersToArray } from "../utils/listing";
 import cloudinary from "../middleware/cloudinary";
 import { TAnalytic } from "../types/analytic";
 import { IRequestExtendsUser } from "../types/user";
@@ -47,6 +47,36 @@ export const getAll = asyncHandler(async (req, res) => {
  export const getLatest = asyncHandler(async (req, res) => {
 	try {
 		const listings = await Listing.find({ "createdAt": { $gte : new Date(Date.now() - 24*60*60 * 1000) } })
+		res.status(200).json(listings)
+	} catch (error) {
+		console.log(error)
+		res.status(400).json("Sorry something went wrong. Couldn't get listings");
+	}
+});
+
+/**
+ ** @desc    search listing
+ ** @route   GET /api/listing/search
+ ** @access  Public
+ */
+ export const search = asyncHandler(async (req, res) => {
+	try {
+		const { priceFrom, priceTo, yearFrom, yearTo, ...filters } = req.query
+		const filtersArr = listingFiltersToArray(filters)
+
+		const listings = await Listing.find(
+			{
+				$and: [
+					...filtersArr,
+					{ price: { $lte: priceTo || Infinity }},
+					{ price: { $gt: priceFrom || 0 }},
+					{ year: { $lte: yearTo || Infinity }},
+					{ year: {$gt: yearFrom || 0 } },
+				],
+				
+			}
+		)
+
 		res.status(200).json(listings)
 	} catch (error) {
 		console.log(error)

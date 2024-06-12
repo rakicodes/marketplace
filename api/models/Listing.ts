@@ -77,4 +77,5 @@ const ListingSchema = new Schema<TListing, TListingModel>({
         timestamps: true,
     });
 
+ListingSchema.index({ name: "text" })
 export const ListingModel: TListingModel = mongoose.model("Listing", ListingSchema);

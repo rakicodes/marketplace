@@ -34,3 +34,18 @@ export type TListing = {
 }
 
 export type TListingModel = Model<TListing>
+
+export type TListingFilters = Partial<{
+    name: string,
+    listingId: string,
+    warranty: boolean,
+    category: string,
+    serialNumber: string,
+    numOfUnits: number,
+    packageType: string,
+    make: string,
+    featuredListing: boolean,
+    status: string,
+    isUsed: boolean,
+    isCertified: boolean
+}>

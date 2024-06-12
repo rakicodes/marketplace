@@ -5,7 +5,7 @@ export enum Status {
     pending = "pending",
     sold = "sold"
 }
-export type TListingId = Types.ObjectId
+export type TObjectId = Types.ObjectId
 
 export type TImage = {
     url: string,
@@ -13,7 +13,7 @@ export type TImage = {
 }
 
 export type TListing = {
-    _id?: TListingId,
+    _id?: TObjectId,
     name: string,
     listingId: string,
     images: Array<String>,
@@ -30,6 +30,7 @@ export type TListing = {
     year: number,
     isUsed: boolean,
     isCertified: boolean
+    user: TObjectId
 }
 
 export type TListingModel = Model<TListing>

@@ -49,8 +49,7 @@ export const add = asyncHandler(
             res.status(401).json("Unauthorized. You are not logged in.");
             return;
             }
-
-			if (!req.files) {
+			if (!req.files || (req.files && req.files.length===0)) {
 				res
 					.status(400)
 					.json(
@@ -124,6 +123,7 @@ export const add = asyncHandler(
 				featuredListing: false,
 				status: Status.sale,
 				listingId: generateListingId(analytic?.data ? analytic.data + 1 : 0),
+				user: req.user._id
 			});
 
 			await Analytic.updateOne({ name: "totalListing" }, { $inc: { data: 1 }}, { upsert: true });
@@ -155,8 +155,13 @@ export const edit = asyncHandler(async (req: IRequestExtendsUser, res) => {
 			res.status(400).json("Listing not found");
 			return;
 		}
+		if (req.user._id?.toString() !== listing.user._id.toString()) {
+			res.status(400).json("User not authorized");
+			return;
+		}
+
 		let editedListingValues: Partial<TListing> = {}
-		if (req.files) {
+		if (req.files && req.files.length as number > 0) {
 			let cloudinaryImages: Array<string> | undefined = undefined;
             let cloudinaryIds: Array<string> | undefined = undefined;
 
@@ -189,7 +194,6 @@ export const edit = asyncHandler(async (req: IRequestExtendsUser, res) => {
 			...editedListingValues
 		}
 		
-		console.log(editedListingValues)
 		const editedListing = await Listing.updateOne({ _id: req.params.id}, editedListingValues)
 
 		res.status(200).json(editedListing)

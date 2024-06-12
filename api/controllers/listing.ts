@@ -15,7 +15,13 @@ import { MulterRequest } from "../types/util";
  ** @access  Public
  */
 export const getOne = asyncHandler(async (req, res) => {
-
+	try {
+		const listing = await Listing.findById(req.params.id)
+		res.status(200).json(listing)
+	} catch (error) {
+		console.log(error)
+		res.status(400).json("Sorry something went wrong. Couldn't get listing");
+	}
 });
 
 /**

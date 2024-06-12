@@ -14,7 +14,9 @@ import { MulterRequest } from "../types/util";
  ** @route   GET /api/:id
  ** @access  Public
  */
-export const getOne = asyncHandler(async (req, res) => {});
+export const getOne = asyncHandler(async (req, res) => {
+
+});
 
 /**
  ** @desc    get all listings
@@ -27,7 +29,7 @@ export const getAll = asyncHandler(async (req, res) => {
 		res.status(200).json(listings)
 	} catch (error) {
 		console.log(error)
-		res.status(400).json("Sorry something went wrong. Couldn't get recipes");
+		res.status(400).json("Sorry something went wrong. Couldn't get listings");
 	}
 });
 

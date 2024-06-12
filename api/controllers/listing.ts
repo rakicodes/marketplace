@@ -21,7 +21,15 @@ export const getOne = asyncHandler(async (req, res) => {});
  ** @route   GET /api
  ** @access  Public
  */
-export const getAll = asyncHandler(async (req, res) => {});
+export const getAll = asyncHandler(async (req, res) => {
+	try {
+		const listings = await Listing.find()
+		res.status(200).json(listings)
+	} catch (error) {
+		console.log(error)
+		res.status(400).json("Sorry something went wrong. Couldn't get recipes");
+	}
+});
 
 /**
  ** @desc    add new listing

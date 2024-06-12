@@ -208,4 +208,32 @@ export const edit = asyncHandler(async (req: IRequestExtendsUser, res) => {
  ** @route   DELETE /api
  ** @access  Private
  */
-export const remove = asyncHandler(async (req, res) => {});
+export const remove = asyncHandler(async (req: IRequestExtendsUser, res) => {
+	try {
+		if (!req.user) {
+			res.status(401).json("Unauthorized. You are not logged in.");
+			return;
+		}
+	
+		const listing = await Listing.findById(req.params.id)
+		if (!listing) {
+			res.status(400).json("Listing not found");
+			return;
+		}
+		if (req.user._id?.toString() !== listing.user._id.toString()) {
+			res.status(400).json("User not authorized");
+			return;
+		}
+	
+		listing.cloudinaryIds.forEach(async (cId) => {
+			await cloudinary.uploader.destroy(String(cId))
+		})
+	
+		await Listing.deleteOne({ _id: req.params.id })
+	
+		res.status(200).json({ id: req.params.id });
+	} catch (error) {
+		console.log(error);
+		res.status(400).json("Sorry something went wrong. Couldn't delete listing");
+	}
+});

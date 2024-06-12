@@ -9,6 +9,6 @@ router.get("/:id", getOne)
 router.get("/", getAll)
 router.post("/", protect, upload.array("images", 6), add);
 router.put("/edit/:id", protect, upload.array("images", 6), edit);
-router.put("/delete/:id", remove)
+router.delete("/delete/:id", protect, remove)
 
 export default router;

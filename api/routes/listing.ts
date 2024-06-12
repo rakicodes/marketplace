@@ -1,10 +1,11 @@
 import express from "express";
-import { add, edit, remove, getOne, getAll } from "../controllers/listing";
+import { add, edit, remove, getOne, getAll, getLatest } from "../controllers/listing";
 const router = express.Router();
 import upload from "../middleware/multer";
 import protect from "../middleware/auth";
 
 
+router.get("/latest", getLatest)
 router.get("/:id", getOne)
 router.get("/", getAll)
 router.post("/", protect, upload.array("images", 6), add);

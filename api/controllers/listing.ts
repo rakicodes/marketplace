@@ -40,6 +40,21 @@ export const getAll = asyncHandler(async (req, res) => {
 });
 
 /**
+ ** @desc    get latest listings
+ ** @route   GET /api/latest
+ ** @access  Public
+ */
+ export const getLatest = asyncHandler(async (req, res) => {
+	try {
+		const listings = await Listing.find({ "createdAt": { $gte : new Date(Date.now() - 24*60*60 * 1000) } })
+		res.status(200).json(listings)
+	} catch (error) {
+		console.log(error)
+		res.status(400).json("Sorry something went wrong. Couldn't get listings");
+	}
+});
+
+/**
  ** @desc    add new listing
  ** @route   POST /api
  ** @access  Private

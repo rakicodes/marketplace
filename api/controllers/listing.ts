@@ -7,6 +7,7 @@ import { generateListingId } from "../utils/listing";
 import cloudinary from "../middleware/cloudinary";
 import { TAnalytic } from "../types/analytic";
 import { IRequestExtendsUser } from "../types/user";
+import { MulterRequest } from "../types/util";
 
 /**
  ** @desc    get listing by its id
@@ -89,10 +90,6 @@ export const add = asyncHandler(
 			let cloudinaryImages: Array<string> | null = null;
             let cloudinaryIds: Array<string> | null = null;
 
-            interface MulterRequest extends Request {
-                files?: Express.Multer.File[];
-            }
-
 			for (const f in req.files) {
 				const img: MulterRequest = req.files[f as keyof Request["files"]];
 				const cloudinaryImg = await cloudinary.uploader.upload(img.path);
@@ -146,7 +143,61 @@ export const add = asyncHandler(
  ** @route   PUT /api/:id
  ** @access  Private
  */
-export const edit = asyncHandler(async (req, res) => {});
+export const edit = asyncHandler(async (req: IRequestExtendsUser, res) => {
+	try {
+		if (!req.user) {
+			res.status(401).json("Unauthorized. You are not logged in.");
+			return;
+		}
+
+		const listing = await Listing.findById(req.params.id)
+		if (!listing) {
+			res.status(400).json("Listing not found");
+			return;
+		}
+		let editedListingValues: Partial<TListing> = {}
+		if (req.files) {
+			let cloudinaryImages: Array<string> | undefined = undefined;
+            let cloudinaryIds: Array<string> | undefined = undefined;
+
+			listing.cloudinaryIds.forEach(async (cId) => {
+				await cloudinary.uploader.destroy(String(cId))
+			})
+
+			for (const f in req.files) {
+				const img: MulterRequest = req.files[f as keyof Request["files"]];
+				const cloudinaryImg = await cloudinary.uploader.upload(img.path);
+                if (!cloudinaryImages) {
+                    cloudinaryImages = [cloudinaryImg.secure_url];
+                } else {
+                    cloudinaryImages = [cloudinaryImg.secure_url, ...cloudinaryImages];
+                }
+                if (!cloudinaryIds) {
+                    cloudinaryIds = [cloudinaryImg.public_id]
+                } else {
+                    cloudinaryIds = [cloudinaryImg.public_id, ...cloudinaryIds]
+                }
+			}
+
+			editedListingValues = {
+				cloudinaryIds,
+                images: cloudinaryImages,
+			}
+		}
+		editedListingValues = {
+			...req.body,
+			...editedListingValues
+		}
+		
+		console.log(editedListingValues)
+		const editedListing = await Listing.updateOne({ _id: req.params.id}, editedListingValues)
+
+		res.status(200).json(editedListing)
+	} catch (error) {
+		console.log(error);
+		res.status(400).json("Sorry something went wrong. Couldn't edit listing");
+	}
+});
 
 /**
  ** @desc    delete listing

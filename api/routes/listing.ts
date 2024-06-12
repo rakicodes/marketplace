@@ -8,7 +8,7 @@ import protect from "../middleware/auth";
 router.get("/:id", getOne)
 router.get("/", getAll)
 router.post("/", protect, upload.array("images", 6), add);
-router.put("/edit/:id", edit);
+router.put("/edit/:id", protect, upload.array("images", 6), edit);
 router.put("/delete/:id", remove)
 
 export default router;

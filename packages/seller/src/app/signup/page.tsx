@@ -7,8 +7,21 @@ const Page = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async () => {
+    console.log("submitting...")
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+    })
+    const data = await res.json()
+    console.log(data)
   }
 
   return (

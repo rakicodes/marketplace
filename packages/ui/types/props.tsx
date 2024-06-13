@@ -27,3 +27,11 @@ export type IUnderlineInputWithLabel = IUnderlineInput & { label: string }
 export type IFilledButton =  IPropsWithOnlyChildren & {
     onClick: () => void
 }
+
+export type ILoginForm = {
+    email: string,
+    password: string,
+    onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onSubmit: () => void
+}

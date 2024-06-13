@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import { IPropsWithOnlyChildren } from "../types/props";
 
-const Label = () => {
-  return (
-    <div>Label</div>
-  )
-}
+const Label = ({ children }: IPropsWithOnlyChildren) => {
+	return <label className="uppercase text-sm">{children}</label>;
+};
 
-export default Label
+export default Label;

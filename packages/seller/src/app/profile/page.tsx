@@ -16,11 +16,11 @@ const items: ICard[] = [
         alt: "",
       },
       {
-        src: "https://res.cloudinary.com/dfdecuoci/image/upload/v1718178291/zy9ekkx1h9illjazfv61.jpg",
+        src: "https://res.cloudinary.com/dfdecuoci/image/upload/v1718178289/fmliwsbscxcoi1xpbprv.jpg",
         alt: "",
       },
       {
-        src: "https://res.cloudinary.com/dfdecuoci/image/upload/v1718178291/zy9ekkx1h9illjazfv61.jpg",
+        src: "https://res.cloudinary.com/dfdecuoci/image/upload/v1718178286/tuxllrueuv1zykjamlwb.jpg",
         alt: "",
       },
     ],

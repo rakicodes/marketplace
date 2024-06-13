@@ -57,3 +57,9 @@ export type ICard = { content: ICardContent } & IImageArray;
 export type ICardsContainer = {
   items: ICard[];
 };
+
+export type ISlider = {
+    total: number,
+    curr: number,
+    handleSlider: (i: number) => void
+}

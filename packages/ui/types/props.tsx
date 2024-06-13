@@ -35,3 +35,25 @@ export type ILoginForm = {
     onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void,
     onSubmit: () => void
 }
+
+export type ICardContent = {
+    listingId: string,
+    name: string,
+    location: string,
+    price: number
+}
+
+export type ICardImage = {
+    src: string,
+    alt: string
+}
+
+export type IImageArray = {
+    images: ICardImage[]
+}
+
+export type ICard = { content: ICardContent } & IImageArray
+
+export type ICardsContainer = {
+    items: ICard[]
+}

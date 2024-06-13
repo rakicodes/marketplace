@@ -5,7 +5,7 @@ import UnderlineInputWithLabel from "../molecules/UnderlineInputWithLabel";
 import FilledButton from "../atoms/FilledButton";
 import { ISignupForm } from "../types/props";
 
-const SignupInputs = ({ name, email, password, onChangeName, onChangeEmail, onChangePassword, onSubmit }: ISignupForm) => {
+const SignupForm = ({ name, email, password, onChangeName, onChangeEmail, onChangePassword, onSubmit }: ISignupForm) => {
 	return (
 		<div className="flex flex-col gap-y-10">
 			<UnderlineInputWithLabel
@@ -36,4 +36,4 @@ const SignupInputs = ({ name, email, password, onChangeName, onChangeEmail, onCh
 	);
 };
 
-export default SignupInputs;
+export default SignupForm;

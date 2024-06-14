@@ -1,11 +1,12 @@
 import React from 'react'
+import { IListingHeader } from '../types/props'
 
-const ListingHeader = () => {
+const ListingHeader = ({ category, name, price }: IListingHeader) => {
   return (
     <div>
-        <span className="text-slate-500 text-sm">Category</span>
-        <h1 className="font-bold text-lg">Name</h1>
-        <span className="font-bold text-orange-500 text-md">price</span>
+        <span className="text-slate-500 text-sm">{category}</span>
+        <h1 className="font-bold text-lg">{name}</h1>
+        <span className="font-bold text-orange-500 text-md">{price}</span>
     </div>
   )
 }

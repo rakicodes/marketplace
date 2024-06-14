@@ -84,3 +84,24 @@ export type IImageSlide = IImageArray & {
   curr: number,
   handleCurr: (i: number) => void
 }
+
+export type IParamsId = {
+  params: {
+    id: string
+  }
+} 
+
+export type IListingHeader = {
+  category: string,
+  price: number,
+  name: string
+}
+
+export type IListingSummary = {
+  listingId: string,
+  make: string,
+  serialNumber: string,
+  numOfUnits: number,
+  packageType: string,
+  year: number,
+}

@@ -1,6 +1,9 @@
+"use client"
+
 import React from "react";
 import ProfileTemplate from "@ui/templates/ProfileTemplate";
 import { ICard } from "@ui/types/props";
+import { useRouter } from "next/navigation";
 
 const items: ICard[] = [
   {
@@ -159,9 +162,10 @@ const items: ICard[] = [
   },
 ];
 const Page = () => {
+  const router = useRouter();
   return (
     <div>
-      <ProfileTemplate items={items} />
+      <ProfileTemplate items={items} onClick={() => router.push("/add")}/>
     </div>
   );
 };

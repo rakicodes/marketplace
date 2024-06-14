@@ -63,3 +63,19 @@ export type ISlider = {
     curr: number,
     handleSlider: (i: number) => void
 }
+
+export type IProfileTemplate = ICardsContainer & {
+  onClick: () => void
+}
+
+export type ISwitchWithLabel = {
+  label: string
+}
+
+export type IDropdown = {
+  options: string[]
+}
+
+export type ISelectMenu = IPropsWithOnlyChildren & {
+  label: string
+}

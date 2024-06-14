@@ -12,7 +12,7 @@ const UnderlineInputWithLabel = ({
   onChange,
 }: IUnderlineInputWithLabel) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <Label>{label}</Label>
       <UnderlineInput
         type={type}

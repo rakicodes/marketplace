@@ -1,10 +1,10 @@
 import React from "react";
-import { IFilledButton } from "../types/props";
+import { IButton } from "../types/props";
 
-const FilledButton = ({ onClick, children }: IFilledButton) => {
+const FilledButton = ({ onClick, children }: IButton) => {
   return (
     <button
-      className="bg-orange-500 py-4 px-2 rounded uppercase text-white text-sm"
+      className="bg-orange-500 py-2 px-4 rounded uppercase text-white text-sm"
       onClick={onClick}
     >
       {children}

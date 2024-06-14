@@ -24,7 +24,7 @@ export type IUnderlineInput = {
 
 export type IUnderlineInputWithLabel = IUnderlineInput & { label: string };
 
-export type IFilledButton = IPropsWithOnlyChildren & {
+export type IButton = IPropsWithOnlyChildren & {
   onClick: () => void;
 };
 

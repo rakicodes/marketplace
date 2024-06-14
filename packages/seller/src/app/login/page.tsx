@@ -4,11 +4,14 @@ import LoginTemplate from "@ui/templates/LoginTemplate";
 import { AuthContext } from "@/app/context/auth";
 import { useRouter } from "next/navigation"
 import { isAuth } from "@ui/types/typeguards";
+import { IAuth } from "@ui/types/data";
 
 const Page = () => {
   const { currentUser, handleAuthCookie } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState<Error | null>(null)
+  const [open, setOpen] = useState(false)
   const router = useRouter();
 
   useEffect(() => {
@@ -22,7 +25,8 @@ const Page = () => {
     setPassword("")
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`,
@@ -37,15 +41,21 @@ const Page = () => {
           }),
         },
       );
-      const data = await res.json();
+      const data: IAuth | Error = await res.json();
       console.log(data)
       if (isAuth(data)) {
         handleAuthCookie(data)
         resetForm()
+        setOpen(false)
         router.push("/profile")  
+      } else {
+        console.log("error else")
+        setOpen(true)
+        setErr(data)
       }
     } catch (error) {
-      console.log(error)
+      setOpen(true)
+      setErr(error as Error)
     }
   };
 
@@ -54,6 +64,9 @@ const Page = () => {
       <LoginTemplate
         email={email}
         password={password}
+        error={err}
+        open={open}
+        handleOpen={setOpen}
         onChangeEmail={(e: React.ChangeEvent<HTMLInputElement>) =>
           setEmail(e.target.value)
         }

@@ -10,6 +10,8 @@ const Page = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
+  const [err, setErr] = useState<Error | null>(null)
   const router = useRouter();
 
   useEffect(() => {
@@ -44,11 +46,17 @@ const Page = () => {
       if (isAuth(data)) {
         handleAuthCookie(data)
         resetForm()
+        setOpen(false)
         router.push("/")
+      } else {
+        setOpen(true)
+        setErr(data)
       }
       
     } catch (error) {
       console.log(error)
+      setOpen(true)
+      setErr(error as Error)
     }
   };
 
@@ -58,6 +66,9 @@ const Page = () => {
         name={name}
         email={email}
         password={password}
+        open={open}
+        error={err}
+        handleOpen={setOpen}
         onChangeName={(e: React.ChangeEvent<HTMLInputElement>) =>
           setName(e.target.value)
         }

@@ -12,7 +12,7 @@ const Header = ({ toProfile, toSignup, toLogin }: IHeader) => {
 	}
 
 	return (
-		<div className="px-4 md:px-8 py-3 flex justify-between items-center w-full absolute top-0">
+		<div className="px-4 md:px-8 py-3 flex justify-between items-center w-full absolute top-0 z-20">
 			<span>Marketplace: Sellers</span>
 			<div className="flex gap-x-2">
 				{currentUser ? (

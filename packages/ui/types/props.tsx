@@ -33,7 +33,7 @@ export type ILoginForm = {
   password: string;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
+  onSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type ICardContent = {
@@ -110,4 +110,21 @@ export type IHeader = {
   toProfile: () => void,
   toSignup: () => void,
   toLogin: () => void
+}
+
+export type ILoginTemplate = ILoginForm & {
+  error: Error | null,
+  open: boolean,
+  handleOpen: (open: boolean) => void
+}
+
+export type IErrorPopup = IPropsWithOnlyChildren & {
+  open: boolean,
+  handleOpen: (open: boolean) => void
+}
+
+export type ISignupTemplate = ISignupForm & {
+  error: Error | null,
+  open: boolean,
+  handleOpen: (open: boolean) => void
 }

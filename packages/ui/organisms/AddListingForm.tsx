@@ -5,6 +5,7 @@ import SwitchWithLabel from '../molecules/SwitchWithLabel'
 import SelectMenu from '../atoms/SelectMenu'
 import FilledButton from '../atoms/FilledButton'
 import Dropdown from '../molecules/Dropdown'
+import ImageInput from '../atoms/ImageInput'
 
 const AddListingForm = () => {
   return (
@@ -33,6 +34,9 @@ const AddListingForm = () => {
             <SwitchWithLabel label="warranty" />
             <SwitchWithLabel label="certified" />
             <SwitchWithLabel label="used"/>
+        </div>
+        <div>
+            <ImageInput />
         </div>
         <FilledButton onClick={() => console.log()}>Submit</FilledButton>
     </div>

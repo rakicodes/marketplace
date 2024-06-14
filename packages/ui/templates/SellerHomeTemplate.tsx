@@ -5,7 +5,7 @@ import FilledButton from "../atoms/FilledButton";
 const SellerHomeTemplate = () => {
 	return (
 		<div>
-			<div className="px-4 md:px-8 py-6 flex flex-col gap-y-8 h-96 justify-center">
+			<div className="px-4 md:px-8 pt-20 md:pt-6 pb-6 flex flex-col gap-y-8 h-96 justify-center">
 				<h1 className="text-center font-bold text-xl">
 					The Marketplace for Sellers
 				</h1>

@@ -5,7 +5,7 @@ import OutlineButton from "../atoms/OutlineButton";
 
 const Header = () => {
 	return (
-		<div className="px-4 md:px-8 py-6 flex justify-between items-center w-full">
+		<div className="px-4 md:px-8 py-3 flex justify-between items-center w-full absolute top-0">
 			<span>Marketplace: Sellers</span>
 			<div className="flex gap-x-2">
 				{true ? (

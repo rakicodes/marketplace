@@ -12,7 +12,7 @@ const LoginTemplate = ({
 }: ILoginForm) => {
   return (
     <CenteredContentContainer>
-      <div className="flex flex-col p-10 w-full md:w-80 md:p-8 gap-y-10 bg-white rounded">
+      <div className="flex flex-col p-10 w-full md:w-80 md:p-8 gap-y-10 bg-white border border-slate-500 rounded-lg">
         <div>
           <h1 className="text-2xl font-bold">Login</h1>
           <p className="text-sm">Start selling today!</p>

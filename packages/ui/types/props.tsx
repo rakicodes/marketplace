@@ -79,3 +79,8 @@ export type IDropdown = {
 export type ISelectMenu = IPropsWithOnlyChildren & {
   label: string
 }
+
+export type IImageSlide = IImageArray & {
+  curr: number,
+  handleCurr: (i: number) => void
+}

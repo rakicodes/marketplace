@@ -22,3 +22,15 @@ export type IListing = {
     isCertified: boolean
     user: TObjectId
   }
+
+  export type IAuth = {
+    id: string,
+    name: string,
+    email: string,
+    token: string
+  } | null
+
+  export type IAuthContext = {
+    currentUser: IAuth,
+    handleAuthCookie: (user: IAuth) => void
+  }

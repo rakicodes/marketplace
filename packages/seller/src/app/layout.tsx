@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@ui/organisms/Header";
-import Footer from "@ui/organisms/Footer";
+import AuthContextWrapper from "./context/AuthContextWrapper";
+import AppLayout from "./AppLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="relative">
-          <Header />
-          {children}
-          <Footer />
-        </div>
-      </body>
+      <AuthContextWrapper>
+        <body className={inter.className}>
+          <div className="relative">
+            <AppLayout>{children}</AppLayout>
+          </div>
+        </body>
+      </AuthContextWrapper>
     </html>
   );
 }

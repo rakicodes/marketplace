@@ -105,3 +105,9 @@ export type IListingSummary = {
   packageType: string,
   year: number,
 }
+
+export type IHeader = {
+  toProfile: () => void,
+  toSignup: () => void,
+  toLogin: () => void
+}

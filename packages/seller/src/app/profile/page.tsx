@@ -1,8 +1,9 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import ProfileTemplate from "@ui/templates/ProfileTemplate";
 import { ICard } from "@ui/types/props";
+import { AuthContext } from "@/app/context/auth";
 import { useRouter } from "next/navigation";
 
 const items: ICard[] = [
@@ -162,7 +163,15 @@ const items: ICard[] = [
   },
 ];
 const Page = () => {
+  const { currentUser, handleAuthCookie } = useContext(AuthContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!currentUser) {
+      router.push("/")
+    }
+  }, [currentUser, router])
+
   return (
     <div>
       <ProfileTemplate items={items} onClick={() => router.push("/add")}/>

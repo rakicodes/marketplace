@@ -11,3 +11,7 @@ export const isListing = (data: any): data is IListing => {
         return false;
     }
  }
+
+ export const isListingArray = (data: any): data is IListing[] => {
+    return (Array.isArray(data as IListing[]) && (data.length === 0)) || (Array.isArray(data as IListing[]) && (data[0].listingId !== undefined))
+ }

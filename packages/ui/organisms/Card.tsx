@@ -9,7 +9,7 @@ const Card = ({ content, images }: ICard) => {
       <div className="w-full h-56">
         <CardImageSlide images={images} />
       </div>
-      <CardContent {...content} />
+      <CardContent listingId={content.listingId} name={content.name} price={content.price} category={content.category} />
     </div>
   );
 };

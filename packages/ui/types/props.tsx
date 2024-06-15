@@ -39,7 +39,7 @@ export type ILoginForm = {
 export type ICardContent = {
   listingId: string;
   name: string;
-  location: string;
+  category: string;
   price: number;
 };
 

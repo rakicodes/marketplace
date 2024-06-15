@@ -24,7 +24,7 @@ export type IListing = {
   }
 
   export type IAuth = {
-    id: string,
+    _id: string,
     name: string,
     email: string,
     token: string

@@ -18,10 +18,6 @@ const protect = asyncHandler(async (
 		try {
 			// get token from header - 'Bearer token'
 			token = req.headers.authorization.split(" ")[1];
-            if (!token) {
-                res.status(401).json("Not authorized. No token");
-                return;
-            }
 
 			// verify token
 			const { id } = jwt.verify(
@@ -32,16 +28,17 @@ const protect = asyncHandler(async (
 			const user: TUser | null = await User.findById(id).select("-password");
 			if (user) {
 				req.user = user;
-			} else {
-				res.status(401).json("Not authorized");
-				return;
-			}
+			} 
 
 			next(); // calls the next piece of middleware
 		} catch (err) {
             console.log(err)
 			res.status(401).json("Not authorized");
 		}
+	}
+	if (!token) {
+		res.status(401).json("Not authorized. No token");
+		return;
 	}
 });
 

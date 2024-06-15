@@ -11,7 +11,7 @@ import { MulterRequest } from "../types/util";
 
 /**
  ** @desc    get listing by its id
- ** @route   GET /api/:id
+ ** @route   GET /api/listing/:id
  ** @access  Public
  */
 export const getOne = asyncHandler(async (req, res) => {
@@ -26,7 +26,7 @@ export const getOne = asyncHandler(async (req, res) => {
 
 /**
  ** @desc    get all listings
- ** @route   GET /api
+ ** @route   GET /api/listing
  ** @access  Public
  */
 export const getAll = asyncHandler(async (req, res) => {
@@ -41,7 +41,7 @@ export const getAll = asyncHandler(async (req, res) => {
 
 /**
  ** @desc    get latest listings
- ** @route   GET /api/latest
+ ** @route   GET /api/listing/latest
  ** @access  Public
  */
  export const getLatest = asyncHandler(async (req, res) => {
@@ -86,7 +86,7 @@ export const getAll = asyncHandler(async (req, res) => {
 
 /**
  ** @desc    add new listing
- ** @route   POST /api
+ ** @route   POST /api/listing
  ** @access  Private
  */
 export const add = asyncHandler(
@@ -201,7 +201,7 @@ export const add = asyncHandler(
 
 /**
  ** @desc    edit listing
- ** @route   PUT /api/:id
+ ** @route   PUT /api/listing/:id
  ** @access  Private
  */
 export const edit = asyncHandler(async (req: IRequestExtendsUser, res) => {
@@ -266,7 +266,7 @@ export const edit = asyncHandler(async (req: IRequestExtendsUser, res) => {
 
 /**
  ** @desc    delete listing
- ** @route   DELETE /api
+ ** @route   DELETE /api/listing
  ** @access  Private
  */
 export const remove = asyncHandler(async (req: IRequestExtendsUser, res) => {
@@ -298,3 +298,23 @@ export const remove = asyncHandler(async (req: IRequestExtendsUser, res) => {
 		res.status(400).json("Sorry something went wrong. Couldn't delete listing");
 	}
 });
+
+/**
+ ** @desc    get user's listing
+ ** @route   GET /api/listing/user/:id
+ ** @access  Private
+ */
+ export const getUserListing = asyncHandler(async (req: IRequestExtendsUser, res) => {
+	try {
+		if (!req.user) {
+			res.status(401).json("Unauthorized. You are not logged in.");
+			return;
+		}
+
+		const listings = await Listing.find({ user: req.params.id })
+		res.status(200).json(listings)
+	} catch (error) {
+		console.log(error)
+		res.status(400).json("Sorry something went wrong. Couldn't get listing");
+	}
+ });

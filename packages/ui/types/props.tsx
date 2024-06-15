@@ -4,6 +4,12 @@ export type IPropsWithOnlyChildren = {
   children: ReactNode;
 };
 
+export enum IBool {
+  true = 1,
+  false = 0,
+
+}
+
 export type ISignupForm = {
   name: string;
   email: string;
@@ -17,15 +23,18 @@ export type ISignupForm = {
 export type IUnderlineInput = {
   name: string;
   placeholder?: string;
-  value: string;
+  value: string | number;
   type?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type IUnderlineInputWithLabel = IUnderlineInput & { label: string };
 
+export type IButtonType = "submit" | "button"
+
 export type IButton = IPropsWithOnlyChildren & {
-  onClick: () => void;
+  onClick?: () => void;
+  type: IButtonType
 };
 
 export type ILoginForm = {
@@ -68,16 +77,23 @@ export type IProfileTemplate = ICardsContainer & {
   onClick: () => void
 }
 
-export type ISwitchWithLabel = {
+export type ISwitchWithLabel = ISwitch & {
   label: string
+}
+
+export type ISwitch = {
+  value: IBool
+  handleClick: () => void
 }
 
 export type IDropdown = {
   options: string[]
+  handleClick: (c: string) => void
 }
 
 export type ISelectMenu = IPropsWithOnlyChildren & {
-  label: string
+  label: string,
+  category: string
 }
 
 export type IImageSlide = IImageArray & {
@@ -112,19 +128,54 @@ export type IHeader = {
   toLogin: () => void
 }
 
-export type ILoginTemplate = ILoginForm & {
-  error: Error | null,
+export type IError = {
+  error: Error | null | string,
   open: boolean,
   handleOpen: (open: boolean) => void
 }
+
+export type ILoginTemplate = ILoginForm & IError
 
 export type IErrorPopup = IPropsWithOnlyChildren & {
   open: boolean,
   handleOpen: (open: boolean) => void
 }
 
-export type ISignupTemplate = ISignupForm & {
-  error: Error | null,
-  open: boolean,
-  handleOpen: (open: boolean) => void
+export type ISignupTemplate = ISignupForm & IError
+
+export type IAddListingTemplate = IListingForm & IError
+
+export type IListingForm = IListing & {
+  handleChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleChangeMake: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleChangePrice: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleChangeSerialNumber: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleChangePackage: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleClickIsUsed: () => void,
+  handleClickIsCertified: () => void,
+  handleClickWarranty: () => void,
+  handleClickCategory: (c: string) => void,
+  handleChangeImages: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleChangeNumOfUnits: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
+}
+
+export type IListing = {
+  name: string,
+  images: FileList,
+  price: string,
+  warranty: IBool,
+  category: string,
+  serialNumber: string,
+  numOfUnits: number,
+  packageType: string,
+  make: string,
+  year: string,
+  isUsed: IBool,
+  isCertified: IBool,
+}
+
+export type IImageInput = {
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

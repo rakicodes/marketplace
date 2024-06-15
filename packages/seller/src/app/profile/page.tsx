@@ -2,14 +2,13 @@
 
 import React, { useEffect, useContext, useState } from "react";
 import ProfileTemplate from "@ui/templates/ProfileTemplate";
-import { ICard, IImageArray, IParamsId } from "@ui/types/props";
+import { ICard } from "@ui/types/props";
 import { AuthContext } from "@/app/context/auth";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { IAuth, IListing } from "@ui/types/data";
 import { isListingArray } from "@ui/types/typeguards";
 import { listingArrayToCardArray } from "@ui/utils/convert";
-
 
 const Page = () => {
 	const { currentUser, handleAuthCookie } = useContext(AuthContext);
@@ -18,6 +17,10 @@ const Page = () => {
   const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
+    const handleCardClick = (id: string) => {
+      router.push(`/listing/${id}`)
+    }
+
     const fetchData = async () => {
       const authCookie = JSON.parse(getCookie("auth") || "") as IAuth 
       try {
@@ -28,7 +31,7 @@ const Page = () => {
 				})
         const data: IListing[] | Error = await res.json();
         if (isListingArray(data)) {
-          setData(listingArrayToCardArray(data))
+          setData(listingArrayToCardArray(data, handleCardClick))
         } else {
           setError(data)
         }
@@ -37,7 +40,7 @@ const Page = () => {
       }
     };
     fetchData()
-  }, [])
+  }, [router])
 
 	useEffect(() => {
 		if (!currentUser) {

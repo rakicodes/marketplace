@@ -6,7 +6,7 @@ const CardsContainer = ({ items }: ICardsContainer) => {
   return (
     <div className="flex gap-x-5 overflow-x-auto w-full">
       {items.map((item, i) => (
-        <Card key={i} content={item.content} images={item.images} />
+        <Card key={i} content={item.content} images={item.images} id={item.id} handleClick={item.handleClick}/>
       ))}
     </div>
   );

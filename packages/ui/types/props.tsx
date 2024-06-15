@@ -52,7 +52,7 @@ export type IImageArray = {
   images: ICardImage[];
 };
 
-export type ICard = { content: ICardContent } & IImageArray;
+export type ICard = { content: ICardContent, id: string, handleClick: (id: string) => void } & IImageArray;
 
 export type ICardsContainer = {
   items: ICard[];
@@ -61,7 +61,7 @@ export type ICardsContainer = {
 export type ISlider = {
     total: number,
     curr: number,
-    handleSlider: (i: number) => void
+    handleSlider: (id: string) => void
 }
 
 export type IProfileTemplate = ICardsContainer & {

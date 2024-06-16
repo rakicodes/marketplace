@@ -34,7 +34,7 @@ export type IButtonType = "submit" | "button"
 
 export type IButton = IPropsWithOnlyChildren & {
   onClick?: () => void;
-  type: IButtonType
+  type?: IButtonType
 };
 
 export type ILoginForm = {

@@ -4,7 +4,6 @@ import AddListingTemplate from "@ui/templates/AddListingTemplate";
 import { useRouter } from "next/navigation";
 import { IListing } from "@ui/types/props";
 import { getCookie } from "cookies-next";
-import { formatStringToTwoDecimal } from "@ui/utils/format";
 import { areRequiredFieldsFilled, isAddListingFormValid, isFieldGteOne, isLenLteMax, isPriceValid, isYearValid } from "@ui/utils/validation";
 import { IMAGES_MAX_LEN } from "@ui/utils/constant";
 import { IAuth } from "@ui/types/data";
@@ -68,11 +67,21 @@ const Page = () => {
       if (res.status === 201) {
           router.push(`/listing/${resData._id}`)
       } else {
+		window.scroll({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		 });
           setOpen(true)
           setErr(resData)
       }
 
     } else {
+		window.scroll({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		 });
       setOpen(true)
       if (!areRequiredFieldsFilled(data)) {
         setErr("Make sure all fields are filled")

@@ -9,7 +9,7 @@ const AppLayout = ({ children }: IPropsWithOnlyChildren) => {
   const router = useRouter()  
   return (
     <>
-        <Header toProfile={() => router.push("/profile")} toSignup={() => router.push("/signup")} toLogin={() => router.push("/login")} />
+        <Header toProfile={() => router.push("/profile")} toSignup={() => router.push("/signup")} toLogin={() => router.push("/login")} toHome={() => router.push("/")}/>
             {children}
         <Footer />
     </>

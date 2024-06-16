@@ -125,7 +125,8 @@ export type IListingSummary = {
 export type IHeader = {
   toProfile: () => void,
   toSignup: () => void,
-  toLogin: () => void
+  toLogin: () => void,
+  toHome: () => void
 }
 
 export type IError = {

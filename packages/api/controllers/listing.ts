@@ -110,6 +110,7 @@ export const add = asyncHandler(
             res.status(401).json("Unauthorized. You are not logged in.");
             return;
             }
+			console.log(req.files, req.file)
 			if (!req.files || (req.files && req.files.length===0)) {
 				res
 					.status(400)

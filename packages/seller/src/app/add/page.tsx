@@ -7,6 +7,7 @@ import { getCookie } from "cookies-next";
 import { formatStringToTwoDecimal } from "@ui/utils/format";
 import { areRequiredFieldsFilled, isAddListingFormValid, isFieldGteOne, isLenLteMax, isPriceValid, isYearValid } from "@ui/utils/validation";
 import { IMAGES_MAX_LEN } from "@ui/utils/constant";
+import { IAuth } from "@ui/types/data";
 
 const INITIAL: IListing = {
 	name: "",
@@ -34,18 +35,42 @@ const Page = () => {
 		}
 	}, [router]);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+    const authCookie = JSON.parse(getCookie("auth") || "") as IAuth 
+
     if (isAddListingFormValid(data)) {
       setOpen(false)
       const formData = new FormData()
-      formData.append("data", JSON.stringify({
-        ...data,
-        isUsed: data.isUsed ? true : false,
-        isCertified: data.isCertified ? true : false,
-        warranty: data.warranty ? true : false,
-        price: formatStringToTwoDecimal(data.price)
-      }))
+      formData.append("name", data.name)
+      formData.append("price", data.price)
+      formData.append("make", data.make)
+      formData.append("packageType", data.packageType)
+      formData.append("category", data.category)
+      formData.append("serialNumber", data.serialNumber)
+      formData.append("warranty", String(data.warranty))
+      formData.append("isUsed", String(data.isUsed))
+      formData.append("isCertified", String(data.isCertified))
+      formData.append("numOfUnits", String(data.numOfUnits))
+      formData.append("year", data.year)
+      for (let image in data.images) {
+        formData.append("images", data.images[image])
+      }
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/listing`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authCookie ? authCookie.token : ""}`
+        },
+        body: formData
+      })
+      const resData = await res.json()
+      if (res.status === 201) {
+          router.push(`/listing/${resData._id}`)
+      } else {
+          setOpen(true)
+          setErr(resData)
+      }
 
     } else {
       setOpen(true)

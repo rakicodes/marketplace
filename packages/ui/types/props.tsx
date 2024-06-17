@@ -4,6 +4,10 @@ export type IPropsWithOnlyChildren = {
   children: ReactNode;
 };
 
+export type IPropsReactNode = {
+  elem: ReactNode
+}
+
 export enum IBool {
   true = 1,
   false = 0,

@@ -1,8 +1,9 @@
-"use client";
-import React from "react";
+import React, { ReactNode } from "react";
 import FilledButton from "../atoms/FilledButton";
+import { IPropsReactNode } from "../types/props";
 
-const SellerHomeTemplate = () => {
+
+const SellerHomeTemplate = ({ elem }: IPropsReactNode) => {
 	return (
 		<div>
 			<div className="px-4 md:px-8 pt-20 md:pt-6 pb-6 flex flex-col gap-y-8 h-96 justify-center">
@@ -81,7 +82,7 @@ const SellerHomeTemplate = () => {
 						Together, we can achieve great success!
 					</h4>
 					<div>
-						<FilledButton onClick={() => console.log()}>Start now</FilledButton>
+						<FilledButton>{elem}</FilledButton>
 					</div>
 				</div>
 			</div>

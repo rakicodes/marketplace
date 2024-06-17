@@ -74,7 +74,7 @@ export type ICardsContainer = {
 export type ISlider = {
     total: number,
     curr: number,
-    handleSlider: (id: string) => void
+    handleSlider: (id: number) => void
 }
 
 export type IProfileTemplate = ICardsContainer & {

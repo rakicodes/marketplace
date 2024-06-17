@@ -15,8 +15,8 @@ const CardImageSlide = ({ images }: IImageArray) => {
         }
     }
 
-    const handleSlider = (i: number) => {
-        setCurr(i)
+    const handleSlider = (id: number) => {
+        setCurr(id)
     }
 
   return (

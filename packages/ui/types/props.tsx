@@ -46,7 +46,7 @@ export type ILoginForm = {
   password: string;
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 };
 
 export type ICardContent = {

@@ -37,7 +37,7 @@ export type IUnderlineInputWithLabel = IUnderlineInput & { label: string };
 export type IButtonType = "submit" | "button"
 
 export type IButton = IPropsWithOnlyChildren & {
-  onClick?: () => void;
+  onClick?: () => void | ((e: React.ChangeEvent<HTMLInputElement>) => void);
   type?: IButtonType
 };
 

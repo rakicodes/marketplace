@@ -180,3 +180,8 @@ export type IListing = {
 export type IImageInput = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
+
+export type IErrorPage = {
+  link: () => void,
+  message?: string
+}

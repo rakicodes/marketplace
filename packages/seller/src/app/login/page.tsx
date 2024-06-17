@@ -25,8 +25,7 @@ const Page = () => {
     setPassword("")
   }
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`,

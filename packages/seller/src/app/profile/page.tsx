@@ -9,6 +9,7 @@ import { getCookie } from "cookies-next";
 import { IAuth, IListing } from "@ui/types/data";
 import { isListingArray } from "@ui/types/typeguards";
 import { listingArrayToCardArray } from "@ui/utils/convert";
+import ErrorPageTemplate from "@ui/templates/ErrorPageTemplate";
 
 const Page = () => {
 	const { currentUser, handleAuthCookie } = useContext(AuthContext);
@@ -54,9 +55,9 @@ const Page = () => {
         data ? <ProfileTemplate
 				items={data}
 				onClick={() => router.push("/add")}
-			  /> : <div>Error</div>
+			  /> : <ErrorPageTemplate link={() => router.push("/")} />
       }
-			
+
 		</div>
 	);
 };

@@ -42,14 +42,12 @@ const Page = () => {
         },
       );
       const data: IAuth | Error = await res.json();
-      console.log(data)
       if (isAuth(data)) {
         handleAuthCookie(data)
         resetForm()
         setOpen(false)
         router.push("/profile")  
       } else {
-        console.log("error else")
         setOpen(true)
         setErr(data)
       }

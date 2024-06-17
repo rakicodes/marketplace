@@ -9,6 +9,7 @@ const Header = ({ toProfile, toSignup, toLogin, toHome }: IHeader) => {
 
 	const handleLogout = () => {
 		handleAuthCookie(null)
+		toHome()
 	}
 
 	return (

@@ -6,9 +6,11 @@ import { IBuyerHomeTemplate } from "../types/props";
 
 const BuyerHomeTemplate = ({
 	items,
+	categories,
 	searchValue,
 	onChange,
 	onSearch,
+	onCategory,
 }: IBuyerHomeTemplate) => {
 	return (
 		<div>
@@ -26,7 +28,7 @@ const BuyerHomeTemplate = ({
 				/>
 			</div>
 			<div className="p-4 md:p-8 w-full">
-				<CategoryContainer />
+				<CategoryContainer categories={categories} linkTo={onCategory}/>
 			</div>
 			<div className="flex flex-col gap-y-5 p-4 md:p-8 w-full">
 				<div className="flex border-b border-slate-300 py-2">

@@ -1,15 +1,15 @@
 import React from 'react'
 import CategoryCard from '../../molecules/CategoryCard'
+import { ICategoryContainer } from '../../types/props'
 
-const CategoryContainer = () => {
+const CategoryContainer = ({ categories, linkTo }: ICategoryContainer) => {
   return (
     <div className="flex gap-x-5 overflow-x-auto h-24">
-        <CategoryCard category="option" onClick={() => console.log()} />
-        <CategoryCard category="option 1" onClick={() => console.log()} />
-        <CategoryCard category="option 2" onClick={() => console.log()} />
-        <CategoryCard category="option 3" onClick={() => console.log()} />
-        <CategoryCard category="option 4" onClick={() => console.log()} />
-        <CategoryCard category="option 5" onClick={() => console.log()} />
+        {
+          categories.map((category: string, i: number) => (
+            <CategoryCard key={i} category={category} onClick={() => linkTo(category)} />
+          ))
+        }
     </div>
   )
 }

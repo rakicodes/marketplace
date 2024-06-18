@@ -18,7 +18,9 @@ const ListingsTemplate = ({
 					onSearch={onSearch}
 				/>
 			</div>
-			{items.length ? <CardsGridContainer /> : <></>}
+			<div className="px-4 md:px-8 w-full">
+				{items.length ? <CardsGridContainer items={items} /> : <></>}				
+			</div>
 		</div>
 	);
 };

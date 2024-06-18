@@ -207,8 +207,10 @@ export type ISearchSection = {
 export type IBuyerHomeTemplate = {
   items: ICard[],
   searchValue: string,
+  categories: string[],
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onSearch: () => void
+  onCategory: (c: string) => void,
 }
 
 export type ICategoryCard = {
@@ -227,4 +229,9 @@ export type IListingsTemplate = {
   searchValue: string,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onSearch: () => void
+}
+
+export type ICategoryContainer = {
+  categories: string[],
+  linkTo: (c: string) => void
 }

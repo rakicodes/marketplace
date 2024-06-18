@@ -63,6 +63,7 @@ export const getAll = asyncHandler(async (req, res) => {
 	try {
 		const { priceFrom, priceTo, yearFrom, yearTo, ...filters } = req.query
 		const filtersArr = listingFiltersToArray(filters)
+		console.log(filtersArr)
 
 		const listings = await Listing.find(
 			{

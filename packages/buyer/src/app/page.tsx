@@ -31,17 +31,23 @@ export default function Home() {
 
   }, [router])
 
-  const handleSearch = () => {
+  const handleCategory = (category: string) => {
+    router.push(`/listings?category=${category}`)
+  }
 
+  const handleSearch = () => {
+    router.push(`/listings?name=${searchValue}`)
   }
 
 	return (
 		<>
 			<BuyerHomeTemplate
         items={newListings}
+        categories={["option", "option1", "option2", "option3", "option4", "option5"]}
 				searchValue={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
         onSearch={handleSearch}
+        onCategory={handleCategory}
 			/>
 		</>
 	);

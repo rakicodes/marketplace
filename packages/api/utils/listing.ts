@@ -7,7 +7,9 @@ export const generateListingId = (total: number): string => {
 export const listingFiltersToArray = (filters: TListingFilters): TListingFilters[] => {
     let arr: TListingFilters[] = []
     for (const [key, value] of Object.entries(filters)) {
-        arr = [{ [key]: value }, ...arr]
+        if (value) {
+            arr = [{ [key]: value }, ...arr]
+        }
     }
 
     return arr

@@ -221,3 +221,10 @@ export type IBuyerHeader = {
   toListings: () => void,
   toSellers: ReactNode
 }
+
+export type IListingsTemplate = {
+  items: ICard[],
+  searchValue: string,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onSearch: () => void
+}

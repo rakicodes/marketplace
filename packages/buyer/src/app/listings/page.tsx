@@ -24,7 +24,6 @@ const Page = () => {
             );
             const resData: IListing[] | Error = await res.json(); 
             if (isListingArray(resData)) {
-				console.log(resData)
                 setData(listingArrayToCardArray(resData, handleCardClick))
             } else {
                 setError(resData as Error)
@@ -33,10 +32,10 @@ const Page = () => {
 
         fetchData()
 
-    }, [category, name, router])
+    }, [category, router, name])
 
-    const handleSearch = () => {
-
+    const handleSearch = async () => {
+		router.push(`/listings?name=${searchValue || ""}`)
     }
 
 	return (

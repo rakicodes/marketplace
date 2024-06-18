@@ -1,3 +1,4 @@
+"use client"
 import BuyerHeader from "@ui/organisms/BuyerHeader";
 import Footer from "@ui/organisms/Footer";
 import { IPropsWithOnlyChildren } from "@ui/types/props";
@@ -19,7 +20,7 @@ const AppLayout = ({ children }: IPropsWithOnlyChildren) => {
 								? process.env.NEXT_PUBLIC_SELLER_URL
 								: ""
 						}
-					/>
+					>Sellers</Link>
 				}
 			/>
 			{children}

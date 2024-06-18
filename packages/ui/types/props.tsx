@@ -215,3 +215,9 @@ export type ICategoryCard = {
   category: string,
   onClick: () => void
 }
+
+export type IBuyerHeader = {
+  toHome: () => void,
+  toListings: () => void,
+  toSellers: ReactNode
+}

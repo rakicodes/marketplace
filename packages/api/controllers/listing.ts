@@ -46,7 +46,7 @@ export const getAll = asyncHandler(async (req, res) => {
  */
  export const getLatest = asyncHandler(async (req, res) => {
 	try {
-		const listings = await Listing.find({ "createdAt": { $gte : new Date(Date.now() - 24*60*60 * 1000) } })
+		const listings = await Listing.find().sort({ "created_at": 1 }).limit(12)
 		res.status(200).json(listings)
 	} catch (error) {
 		console.log(error)

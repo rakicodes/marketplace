@@ -189,3 +189,29 @@ export type IErrorPage = {
   link: () => void,
   message?: string
 }
+
+export type IInput = {
+  type?: "text" | "number"
+  name: string,
+  value: string | number,
+  placeholder: string,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export type ISearchSection = {
+  value: string,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onSearch: () => void
+}
+
+export type IBuyerHomeTemplate = {
+  items: ICard[],
+  searchValue: string,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onSearch: () => void
+}
+
+export type ICategoryCard = {
+  category: string,
+  onClick: () => void
+}

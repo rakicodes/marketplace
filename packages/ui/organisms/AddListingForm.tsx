@@ -7,6 +7,7 @@ import FilledButton from "../atoms/FilledButton";
 import Dropdown from "../molecules/Dropdown";
 import ImageInput from "../atoms/ImageInput";
 import { IListingForm } from "../types/props";
+import { CATEGORIES } from "../utils/constant";
 
 const AddListingForm = ({
 	name,
@@ -18,8 +19,8 @@ const AddListingForm = ({
 	isCertified,
 	isUsed,
 	category,
-    year,
-    numOfUnits,
+	year,
+	numOfUnits,
 	handleChangeName,
 	handleChangeMake,
 	handleChangePrice,
@@ -30,8 +31,8 @@ const AddListingForm = ({
 	handleClickWarranty,
 	handleClickCategory,
 	handleChangeImages,
-    handleChangeYear,
-    handleChangeNumOfUnits,
+	handleChangeYear,
+	handleChangeNumOfUnits,
 	handleSubmit,
 }: IListingForm) => {
 	return (
@@ -44,10 +45,10 @@ const AddListingForm = ({
 					value={name}
 					onChange={handleChangeName}
 				/>
-                <div className="flex flex-wrap md:flex-nowrap gap-x-6 gap-y-3">
+				<div className="flex flex-wrap md:flex-nowrap gap-x-6 gap-y-3">
 					<div className="w-full md:w-1/2">
 						<UnderlineInputWithLabel
-                            type="number"
+							type="number"
 							label="number of units"
 							name="numOfUnits"
 							placeholder="number of units"
@@ -109,7 +110,7 @@ const AddListingForm = ({
 					label="category"
 					category={category}>
 					<Dropdown
-						options={["option", "option2", "option3"]}
+						options={CATEGORIES}
 						handleClick={handleClickCategory}
 					/>
 				</SelectMenu>

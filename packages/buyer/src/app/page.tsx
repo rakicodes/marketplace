@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { IListing } from "@ui/types/data";
 import { isListingArray } from "@ui/types/typeguards";
 import { ICard } from "@ui/types/props";
+import { CATEGORIES } from "@ui/utils/constant";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("")
@@ -43,7 +44,7 @@ export default function Home() {
 		<>
 			<BuyerHomeTemplate
         items={newListings}
-        categories={["option", "option1", "option2", "option3", "option4", "option5"]}
+        categories={CATEGORIES}
 				searchValue={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
         onSearch={handleSearch}

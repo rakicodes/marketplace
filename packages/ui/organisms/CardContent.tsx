@@ -13,7 +13,7 @@ const CardContent = ({ listingId, name, category, price }: ICardContent) => {
       </div>
       <div className="flex gap-x-2 justify-between">
         <span className="text-xs">{category}</span>
-        <span className="text-sm font-bold text-orange-500">{price}</span>
+        <span className="text-sm font-bold text-orange-500">${price}</span>
       </div>
     </div>
   );

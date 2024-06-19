@@ -6,7 +6,7 @@ const ListingHeader = ({ category, name, price }: IListingHeader) => {
     <div>
         <span className="text-slate-500 text-sm">{category}</span>
         <h1 className="font-bold text-lg">{name}</h1>
-        <span className="font-bold text-orange-500 text-md">{price}</span>
+        <span className="font-bold text-orange-500 text-md">${price}</span>
     </div>
   )
 }
